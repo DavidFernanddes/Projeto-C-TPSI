@@ -1,4 +1,4 @@
-#include <stdio.h>
+#pragma once
 
 #define MAX_NAME_LENGTH 100
 #define MAX_SCHOOL_LENGTH 4

@@ -1,4 +1,4 @@
-#include <stdio.h>
+#pragma once
 
 #define MAX_LOCAL_LENGTH 100
 #define MAX_EMBAIXADORES 9
@@ -13,7 +13,11 @@ typedef struct visit{
     char data[MAX_DATA_LENGTH];
 } Visit;
 
-//listVisits();
-//consultVisits();
-//addVisists();
-//authVisits();
+
+void carregarVisitas();
+void salvarVisitas();
+
+void listarVisitas();
+void consultarVisitas();
+void adicionarVisitas();
+void autorizarVisitas();

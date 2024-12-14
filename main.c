@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "ambassador.h"
+#include "visit.h"
 
 int main()
 {
+    carregarVisitas();
     int escolha;
 
     do
@@ -33,25 +36,25 @@ int main()
         switch (escolha)
         {
         case 1:
-
+            listarVisitas();
             break;
         case 2:
 
             break;
         case 3:
-
+            consultarVisitas();
             break;
         case 4:
 
             break;
         case 5:
-
+            adicionarVisitas();
             break;
         case 6:
 
             break;
         case 7:
-
+            autorizarVisitas();
             break;
         case 8:
 
