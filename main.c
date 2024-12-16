@@ -3,9 +3,14 @@
 #include "ambassador.h"
 #include "visit.h"
 
+Estudante embaixadores[MAX_EMBAIXADORES];
+int totalEmbaixadores = 0;
+
+Visita visitas[MAX_VISITAS];
+int totalVisitas = 0;
+
 int main()
 {
-    carregarVisitas();
     int escolha;
 
     do
@@ -31,30 +36,38 @@ int main()
         printf("==============================\n");
         printf("Escolha uma das opções (1-15): ");
 
-        scanf("%d", &escolha);
+         if (scanf("%d", &escolha) != 1) {
+
+            printf("Entrada inválida. Por favor, insira um número entre 1 e 15.\n");
+
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF);
+
+            continue;
+        }
 
         switch (escolha)
         {
         case 1:
-            listarVisitas();
+            listarVisitas(visitas, &totalVisitas);
             break;
         case 2:
-
+			listarEmbaixadores(embaixadores, &totalEmbaixadores);
             break;
         case 3:
-            consultarVisitas();
+            consultarVisitas(visitas, &totalVisitas);
             break;
         case 4:
-
+			consultarEmbaixadores(embaixadores, &totalEmbaixadores);
             break;
         case 5:
-            adicionarVisitas();
+            adicionarVisitas(visitas, &totalVisitas, embaixadores, totalEmbaixadores);
             break;
         case 6:
-
+			adicionarEmbaixadores(embaixadores, &totalEmbaixadores);
             break;
         case 7:
-            autorizarVisitas();
+             autorizarVisitas(visitas, &totalVisitas, embaixadores, totalEmbaixadores);
             break;
         case 8:
 

@@ -1,2 +1,58 @@
 #include <stdio.h>
+#include <string.h>
 #include "ambassador.h"
+
+void listarEmbaixadores(Estudante embaixadores[], int *totalEmbaixadores) {
+    if (*totalEmbaixadores == 0) {
+        printf("Nenhum embaixador registrado.\n");
+        return;
+    }
+
+    printf("Listagem de Embaixadores:\n");
+    for (int i = 0; i < *totalEmbaixadores; i++) {
+        printf("Número: %d\nEscola: %s\nNome: %s\nNIF: %s\n",
+               embaixadores[i].numeroEstudante, embaixadores[i].escola, embaixadores[i].nomeCompleto, embaixadores[i].nif);
+    }
+}
+
+void consultarEmbaixadores(Estudante embaixadores[], int *totalEmbaixadores) {
+    if (*totalEmbaixadores == 0) {
+        printf("Nenhum embaixador registrado.\n");
+        return;
+    }
+
+    int numeroConsulta;
+    printf("Digite o número do embaixador para consultar: ");
+    scanf("%d", &numeroConsulta);
+
+    for (int i = 0; i < *totalEmbaixadores; i++) {
+        if (embaixadores[i].numeroEstudante == numeroConsulta) {
+            printf("Detalhes do Embaixador:\n");
+            printf("Número: %d\nEscola: %s\nNome: %s\nNIF: %s\n",
+                   embaixadores[i].numeroEstudante, embaixadores[i].escola, embaixadores[i].nomeCompleto, embaixadores[i].nif);
+            return;
+        }
+    }
+    printf("Embaixador com número %d não encontrado.\n", numeroConsulta);
+}
+
+void adicionarEmbaixadores(Estudante embaixadores[], int *totalEmbaixadores) {
+    if (*totalEmbaixadores >= MAX_EMBAIXADORES) {
+        printf("Limite de embaixadores atingido.\n");
+        return;
+    }
+
+    Estudante novoEmbaixador;
+    printf("Digite o número do embaixador: ");
+    scanf("%d", &novoEmbaixador.numeroEstudante);
+    printf("Digite a escola: ");
+    scanf("%s", novoEmbaixador.escola);
+    printf("Digite o nome completo: ");
+    scanf(" %[^\n]", novoEmbaixador.nomeCompleto);
+    printf("Digite o NIF: ");
+    scanf("%s", novoEmbaixador.nif);
+
+    embaixadores[*totalEmbaixadores] = novoEmbaixador;
+    (*totalEmbaixadores)++;
+    printf("Embaixador adicionado com sucesso!\n");
+}

@@ -1,5 +1,6 @@
 #pragma once
 
+#define MAX_EMBAIXADORES 100
 #define MAX_NAME_LENGTH 100
 #define MAX_SCHOOL_LENGTH 4
 
@@ -10,6 +11,9 @@ typedef struct estudante {
     char nif[9];
 } Estudante;
 
-//listAmbassadors();
-//consultAmbassadors();
-//addAmbassador();
+void carregarEmbaixadores(Estudante embaixadores[], int *totalEmbaixadores);
+void salvarEmbaixadores(Estudante embaixadores[], int *totalEmbaixadores);
+
+void listarEmbaixadores(Estudante embaixadores[], int *totalEmbaixadores);
+void consultarEmbaixadores(Estudante embaixadores[], int *totalEmbaixadores);
+void adicionarEmbaixadores(Estudante embaixadores[], int *totalEmbaixadores);
