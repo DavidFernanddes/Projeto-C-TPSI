@@ -12,6 +12,7 @@ int totalVisitas = 0;
 int main()
 {
     carregarVisitas(visitas, &totalVisitas);
+    carregarEmbaixadores(embaixadores, &totalEmbaixadores);
     int escolha;
 
     do

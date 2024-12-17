@@ -19,7 +19,7 @@ typedef struct visita{
 
 
 void carregarVisitas(Visita visitas[], int *totalVisitas);
-void salvarVisitas(Visita visitas[], int totalVisitas);
+void salvarVisitas(Visita visitas[], int *totalVisitas);
 
 void listarVisitas(Visita visitas[], int *totalVisitas);
 void consultarVisitas(Visita visitas[], int *totalVisitas);

@@ -6,7 +6,7 @@
 
 #define CSV_FILE_V "visitas.csv"
 
-void salvarVisitas(Visita visitas[], int totalVisitas) {
+void salvarVisitas(Visita visitas[], int *totalVisitas) {
     FILE *file = fopen(CSV_FILE_V, "w");
     if (file == NULL) {
         printf("Erro ao abrir o arquivo para escrita.\n");
@@ -15,7 +15,7 @@ void salvarVisitas(Visita visitas[], int totalVisitas) {
 
     fprintf(file, "idVisita,local,data,estado,embaixadores\n");
 
-    for (int i = 0; i < totalVisitas; i++) {
+    for (int i = 0; i < *totalVisitas; i++) {
         fprintf(file, "%d,%s,%s,%s,\"%s\"\n",
                 visitas[i].idVisita,
                 visitas[i].local,
@@ -144,7 +144,7 @@ void adicionarVisitas(Visita visitas[], int *totalVisitas, Estudante embaixadore
         visitas[*totalVisitas] = novaVisita;
         (*totalVisitas)++;
 
-        salvarVisitas(visitas, *totalVisitas);
+        salvarVisitas(visitas, totalVisitas);
 
         printf("Visita adicionada com sucesso!\n");
     
@@ -184,7 +184,7 @@ void autorizarVisitas(Visita visitas[], int *totalVisitas) {
             if (numEmbaixadoresAssociados >= 2) {
                 strcpy(visitas[i].estado, "autorizada");
                 printf("A visita com ID %d foi autorizada com sucesso!\n", idVisita);
-                salvarVisitas(visitas, *totalVisitas);
+                salvarVisitas(visitas, totalVisitas);
             } else {
                 printf("A visita precisa de pelo menos 2 embaixadores para ser autorizada.\n");
             }
