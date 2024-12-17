@@ -11,6 +11,7 @@ int totalVisitas = 0;
 
 int main()
 {
+    carregarVisitas(visitas, &totalVisitas);
     int escolha;
 
     do
@@ -67,7 +68,7 @@ int main()
 			adicionarEmbaixadores(embaixadores, &totalEmbaixadores);
             break;
         case 7:
-             autorizarVisitas(visitas, &totalVisitas, embaixadores, totalEmbaixadores);
+             autorizarVisitas(visitas, &totalVisitas);
             break;
         case 8:
 
