@@ -35,8 +35,6 @@ void salvarEmbaixadores(Estudante embaixadores[], int *totalEmbaixadores) {
         return;
     }
 
-    fprintf(file, "idVisita,local,data,estado,embaixadores\n");
-
     for (int i = 0; i < *totalEmbaixadores; i++) {
         fprintf(file, "%d,%s,%s,%s\n",
                 embaixadores[i].numeroEstudante,

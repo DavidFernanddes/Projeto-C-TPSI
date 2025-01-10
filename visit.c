@@ -115,10 +115,14 @@ void adicionarVisitas(Visita visitas[], int *totalVisitas, Estudante embaixadore
     printf("Quantos embaixadores deseja associar a esta visita? (máximo de %d): ", MAX_NUM_EMBAIXADORES);
     scanf("%d", &numEmbaixadores);
 
-    if (numEmbaixadores < 2) {
+    if (totalEmbaixadores == 0) {
+        printf("Não há embaixadores disponíveis. Não é possível adicionar visitas.\n");
+        return;
+    } else if (numEmbaixadores < 2) {
         printf("AVISO: A visita precisa de pelo menos 2 embaixadores para ser autorizada.\n");
     }
-        for (int i = 0; i < numEmbaixadores; i++) {
+    
+        for (int i = 0; i < numEmbaixadores && i < totalEmbaixadores; i++) {
             int numeroEstudante;
             printf("Digite o número do estudante para o embaixador %d: ", i + 1);
             scanf("%d", &numeroEstudante);
@@ -174,7 +178,7 @@ void autorizarVisitas(Visita visitas[], int *totalVisitas) {
             while (token != NULL) {
                 numEmbaixadoresAssociados++;
                 if (numEmbaixadoresAssociados > 1) {
-                    printf(" | ");
+                    printf("|");
                 }
                 printf("%s", token);
                 token = strtok(NULL, "|");
