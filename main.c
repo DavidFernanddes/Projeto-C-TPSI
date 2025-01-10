@@ -72,10 +72,10 @@ int main()
              autorizarVisitas(visitas, &totalVisitas);
             break;
         case 8:
-
+            cancelarVisitas(visitas, &totalVisitas);
             break;
         case 9:
-
+            realizarVisitas(visitas, &totalVisitas);
             break;
         case 10:
 

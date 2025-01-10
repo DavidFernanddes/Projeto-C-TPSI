@@ -121,7 +121,6 @@ void adicionarVisitas(Visita visitas[], int *totalVisitas, Estudante embaixadore
     } else if (numEmbaixadores < 2) {
         printf("AVISO: A visita precisa de pelo menos 2 embaixadores para ser autorizada.\n");
     }
-    
         for (int i = 0; i < numEmbaixadores && i < totalEmbaixadores; i++) {
             int numeroEstudante;
             printf("Digite o número do estudante para o embaixador %d: ", i + 1);
@@ -200,3 +199,98 @@ void autorizarVisitas(Visita visitas[], int *totalVisitas) {
         printf("Visita com ID %d não encontrada.\n", idVisita);
     }
 }
+
+void cancelarVisitas(Visita visitas[], int *totalVisitas) {
+    if (*totalVisitas == 0) {
+        printf("Nenhuma visita registrada.\n");
+        return;
+    }
+
+    int idVisita;
+    printf("Digite o ID da visita que deseja cancelar: ");
+    scanf("%d", &idVisita);
+
+    int encontrada = 0;
+    for (int i = 0; i < *totalVisitas; i++) {
+        if (visitas[i].idVisita == idVisita) {
+            encontrada = 1;
+
+            int numEmbaixadoresAssociados = 0;
+            char embaixadoresCopy[MAX_NUM_EMBAIXADORES];
+            strcpy(embaixadoresCopy, visitas[i].embaixadores); 
+
+            char *token = strtok(embaixadoresCopy, "|");
+            printf("Embaixadores associados: ");
+            while (token != NULL) {
+                numEmbaixadoresAssociados++;
+                if (numEmbaixadoresAssociados > 1) {
+                    printf("|");
+                }
+                printf("%s", token);
+                token = strtok(NULL, "|");
+            }
+            printf("\n");
+
+            if (strcmp(visitas[i].estado,"realizada") == 0) {
+                printf("A visita não pode ser cancelada se já está realizada\n");
+            } else {
+                strcpy(visitas[i].estado, "cancelada");
+                printf("A visita com ID %d foi cancelada com sucesso!\n", idVisita);
+                salvarVisitas(visitas, totalVisitas);
+            }
+            break;
+        }
+    }
+
+    if (!encontrada) {
+        printf("Visita com ID %d não encontrada.\n", idVisita);
+    }
+}
+
+void realizarVisitas(Visita visitas[], int *totalVisitas) {
+     if (*totalVisitas == 0) {
+        printf("Nenhuma visita registrada.\n");
+        return;
+    }
+
+    int idVisita;
+    printf("Digite o ID da visita que deseja autorizar: ");
+    scanf("%d", &idVisita);
+
+    int encontrada = 0;
+    for (int i = 0; i < *totalVisitas; i++) {
+        if (visitas[i].idVisita == idVisita) {
+            encontrada = 1;
+
+            int numEmbaixadoresAssociados = 0;
+            char embaixadoresCopy[MAX_NUM_EMBAIXADORES];
+            strcpy(embaixadoresCopy, visitas[i].embaixadores); 
+
+            char *token = strtok(embaixadoresCopy, "|");
+            printf("Embaixadores associados: ");
+            while (token != NULL) {
+                numEmbaixadoresAssociados++;
+                if (numEmbaixadoresAssociados > 1) {
+                    printf("|");
+                }
+                printf("%s", token);
+                token = strtok(NULL, "|");
+            }
+            printf("\n");
+
+            if (strcmp(visitas[i].estado, "autorizada") == 0) {
+                strcpy(visitas[i].estado, "realizada");
+                printf("A visita com ID %d foi realizada com sucesso!\n", idVisita);
+                salvarVisitas(visitas, totalVisitas);
+            } else {
+                printf("A visita precisa de ser autorizada para ser realizada.\n");
+            }
+            break;
+        }
+    }
+
+    if (!encontrada) {
+        printf("Visita com ID %d não encontrada.\n", idVisita);
+    }
+}
+
