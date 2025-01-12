@@ -84,7 +84,7 @@ int main()
 
             break;
         case 12:
-
+            eliminarVisita(visitas, &totalVisitas);
             break;
         case 13:
 

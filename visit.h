@@ -27,3 +27,4 @@ void adicionarVisitas(Visita visitas[], int *totalVisitas, Estudante embaixadore
 void autorizarVisitas(Visita visitas[], int *totalVisitas);
 void cancelarVisitas(Visita visitas[], int *totalVisitas);
 void realizarVisitas(Visita visitas[], int *totalVisitas);
+void eliminarVisita(Visita visitas[], int *totalVisitas);

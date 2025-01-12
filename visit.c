@@ -13,8 +13,6 @@ void salvarVisitas(Visita visitas[], int *totalVisitas) {
         return;
     }
 
-    fprintf(file, "idVisita,local,data,estado,embaixadores\n");
-
     for (int i = 0; i < *totalVisitas; i++) {
         fprintf(file, "%d,%s,%s,%s,\"%s\"\n",
                 visitas[i].idVisita,
@@ -115,12 +113,15 @@ void adicionarVisitas(Visita visitas[], int *totalVisitas, Estudante embaixadore
     printf("Quantos embaixadores deseja associar a esta visita? (máximo de %d): ", MAX_NUM_EMBAIXADORES);
     scanf("%d", &numEmbaixadores);
 
-    if (totalEmbaixadores == 0) {
-        printf("Não há embaixadores disponíveis. Não é possível adicionar visitas.\n");
+    if (numEmbaixadores < 0 || numEmbaixadores > MAX_NUM_EMBAIXADORES) {
+        printf("Número inválido de embaixadores. Tente novamente.\n");
         return;
-    } else if (numEmbaixadores < 2) {
+    }
+    
+    if ((numEmbaixadores > 0 && numEmbaixadores < 2) || numEmbaixadores == 0) {
         printf("AVISO: A visita precisa de pelo menos 2 embaixadores para ser autorizada.\n");
     }
+
         for (int i = 0; i < numEmbaixadores && i < totalEmbaixadores; i++) {
             int numeroEstudante;
             printf("Digite o número do estudante para o embaixador %d: ", i + 1);
@@ -294,3 +295,31 @@ void realizarVisitas(Visita visitas[], int *totalVisitas) {
     }
 }
 
+void eliminarVisita(Visita visitas[], int *totalVisitas) {
+    if (*totalVisitas == 0) {
+        printf("Nenhuma visita registrada para eliminar.\n");
+        return;
+    }
+
+    int idVisita;
+    printf("Digite o ID da visita que deseja eliminar: ");
+    scanf("%d", &idVisita);
+
+    for (int i = 0; i < *totalVisitas; i++) {
+        if (visitas[i].idVisita == idVisita) {
+            if (strcmp(visitas[i].estado, "realizada") == 0) {
+                printf("Não é possível eliminar a visita com ID %d, pois já foi realizada.\n", idVisita);
+                return;
+            }
+
+            for (int j = i; j < *totalVisitas - 1; j++) {
+                visitas[j] = visitas[j + 1];
+            }
+            (*totalVisitas)--;
+            printf("Visita com ID %d eliminada com sucesso!\n", idVisita);
+            salvarVisitas(visitas, totalVisitas);
+            return;
+        }
+    }
+    printf("Visita com ID %d não encontrada.\n", idVisita);
+}
