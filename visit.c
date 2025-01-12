@@ -321,3 +321,47 @@ void eliminarVisita(Visita visitas[], int *totalVisitas) {
     }
     printf("Visita com ID %d não encontrada.\n", idVisita);
 }
+
+void editarVisitas(Visita visitas[], int *totalVisitas) {
+    int id;
+    printf("Digite o ID da visita que deseja editar: ");
+    scanf("%d", &id);
+
+    for (int i = 0; i < *totalVisitas; i++) {
+        if (visitas[i].idVisita == id) {
+
+            printf("Editando a visita com ID %d:\n", id);
+            
+            printf("Local atual: %s\nNovo local: ", visitas[i].local);
+            scanf(" %[^\n]", visitas[i].local);
+
+            printf("Data atual: %s\nNova data: ", visitas[i].data);
+            scanf(" %[^\n]", visitas[i].data);
+
+            printf("Embaixadores atuais: %s\n", visitas[i].embaixadores);
+            printf("Deseja modificar os embaixadores?\n");
+            printf("1. Manter\n2. Alterar\n3. Remover\nEscolha uma opção: ");
+            int opcao;
+            scanf("%d", &opcao);
+
+            if (opcao == 2) {
+                printf("Digite os novos embaixadores: ");
+                char novosEmbaixadores[MAX_NUM_EMBAIXADORES];
+                scanf(" %[^\n]", novosEmbaixadores);
+                strcpy(visitas[i].embaixadores, novosEmbaixadores);
+            } else if (opcao == 3) {
+                strcpy(visitas[i].embaixadores, "");
+                printf("Embaixadores removidos.\n");
+            } else {
+                printf("Embaixadores mantidos.\n");
+            }
+
+            printf("Estado (não pode ser editado): %s\n", visitas[i].estado);
+            
+            salvarVisitas(visitas, totalVisitas);
+            printf("Alterações salvas com sucesso!\n");
+            return;
+        }
+    }
+    printf("Visita com ID %d não encontrada.\n", id);
+}

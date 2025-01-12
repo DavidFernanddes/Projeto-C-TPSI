@@ -11,3 +11,4 @@ void autorizarVisitas(Visita visitas[], int *totalVisitas);
 void cancelarVisitas(Visita visitas[], int *totalVisitas);
 void realizarVisitas(Visita visitas[], int *totalVisitas);
 void eliminarVisita(Visita visitas[], int *totalVisitas);
+void editarVisitas(Visita visitas[], int *totalVisitas);

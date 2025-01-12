@@ -143,3 +143,29 @@ void eliminarEmbaixador(Estudante embaixadores[], int *totalEmbaixadores, Visita
     }
     printf("Embaixador com número %d não encontrado.\n", numeroEstudante);
 }
+
+
+void editarEmbaixadores(Estudante embaixadores[], int *totalEmbaixadores) {
+    int id;
+    printf("Digite o número do estudante que deseja editar: ");
+    scanf("%d", &id);
+
+    for (int i = 0; i < *totalEmbaixadores; i++) {
+        if (embaixadores[i].numeroEstudante == id) {
+            printf("Editando o estudante com número %d:\n", id);
+            printf("Nome atual: %s\nNovo nome: ", embaixadores[i].nomeCompleto);
+            scanf(" %[^\n]", embaixadores[i].nomeCompleto);
+
+            printf("Escola atual: %s\nNova escola: ", embaixadores[i].escola);
+            scanf(" %[^\n]", embaixadores[i].escola);
+
+            printf("NIF atual: %s\nNovo NIF: ", embaixadores[i].nif);
+            scanf(" %[^\n]", embaixadores[i].nif);
+
+            salvarEmbaixadores(embaixadores, totalEmbaixadores);
+            printf("Alterações salvas com sucesso!\n");
+            return;
+        }
+    }
+    printf("Estudante com número %d não encontrado.\n", id);
+}

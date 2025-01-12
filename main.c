@@ -79,10 +79,10 @@ int main()
             realizarVisitas(visitas, &totalVisitas);
             break;
         case 10:
-
+            editarVisitas(visitas, &totalVisitas);
             break;
         case 11:
-
+            editarEmbaixadores(embaixadores, &totalEmbaixadores);
             break;
         case 12:
             eliminarVisita(visitas, &totalVisitas);
