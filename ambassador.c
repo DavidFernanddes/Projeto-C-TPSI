@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include "ambassador.h"
@@ -12,7 +13,6 @@ void carregarEmbaixadores(Estudante embaixadores[], int *totalEmbaixadores) {
     }
 
     char linha[256];
-    fgets(linha, sizeof(linha), file);
 
     while (fgets(linha, sizeof(linha), file) && *totalEmbaixadores < MAX_EMBAIXADORES) {
         Estudante novoEmbaixador;
@@ -101,4 +101,45 @@ void adicionarEmbaixadores(Estudante embaixadores[], int *totalEmbaixadores) {
 
     salvarEmbaixadores(embaixadores, totalEmbaixadores);
     printf("Embaixador adicionado com sucesso!\n");
+}
+
+void eliminarEmbaixador(Estudante embaixadores[], int *totalEmbaixadores, Visita visitas[], int totalVisitas) {
+    if (*totalEmbaixadores == 0) {
+        printf("Nenhum embaixador registrado para eliminar.\n");
+        return;
+    }
+
+    int numeroEstudante;
+    printf("Digite o número do embaixador que deseja eliminar: ");
+    scanf("%d", &numeroEstudante);
+
+    for (int i = 0; i < totalVisitas; i++) {
+        if (strstr(visitas[i].embaixadores, " | ") != NULL) {
+            char *token = strtok(visitas[i].embaixadores, "|");
+            while (token != NULL) {
+                if (atoi(token) == numeroEstudante) {
+                    printf("Não é possível eliminar o embaixador com número %d, pois está associado a uma visita autorizada.\n", numeroEstudante);
+                    return;
+                }
+                token = strtok(NULL, "|");
+            }
+        } else if (atoi(visitas[i].embaixadores) == numeroEstudante) {
+            printf("Não é possível eliminar o embaixador com número %d, pois está associado a uma visita autorizada.\n", numeroEstudante);
+            return;
+        }
+    }
+
+    for (int i = 0; i < *totalEmbaixadores; i++) {
+        if (embaixadores[i].numeroEstudante == numeroEstudante) {
+
+            for (int j = i; j < *totalEmbaixadores - 1; j++) {
+                embaixadores[j] = embaixadores[j + 1];
+            }
+            (*totalEmbaixadores)--;
+            salvarEmbaixadores(embaixadores, totalEmbaixadores);
+            printf("Embaixador com número %d eliminado com sucesso!\n", numeroEstudante);
+            return;
+        }
+    }
+    printf("Embaixador com número %d não encontrado.\n", numeroEstudante);
 }

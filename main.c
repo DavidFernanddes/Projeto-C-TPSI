@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "ambassador.h"
 #include "visit.h"
+#include "util.h"
 
 Estudante embaixadores[MAX_EMBAIXADORES];
 int totalEmbaixadores = 0;
@@ -14,7 +15,7 @@ int main()
     carregarVisitas(visitas, &totalVisitas);
     carregarEmbaixadores(embaixadores, &totalEmbaixadores);
     int escolha;
-
+    
     do
     {
         printf("\n==============================\n");
@@ -87,10 +88,10 @@ int main()
             eliminarVisita(visitas, &totalVisitas);
             break;
         case 13:
-
+            eliminarEmbaixador(embaixadores, &totalEmbaixadores, visitas, totalVisitas);
             break;
         case 14:
-
+            gravarDados(embaixadores, &totalEmbaixadores, visitas, &totalVisitas);
             break;
         case 15:
             exit(0);

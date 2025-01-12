@@ -2,7 +2,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include "visit.h"
-#include "ambassador.h"
 
 #define CSV_FILE_V "visitas.csv"
 
@@ -33,7 +32,6 @@ void carregarVisitas(Visita visitas[], int *totalVisitas) {
     }
 
     char linha[256];
-    fgets(linha, sizeof(linha), file);
 
     while (fgets(linha, sizeof(linha), file) && *totalVisitas < MAX_VISITAS) {
         Visita novaVisita;
