@@ -70,8 +70,8 @@ void listarVisitas(Visita visitas[], int *totalVisitas) {
             token = strtok(NULL, "|");
         }
 
-       printf("ID: %d\nLocal: %s\nData: %s\nEstado: %s\nEmbaixadores (%d): %s\n\n",
-               visitas[i].idVisita, visitas[i].local, visitas[i].data, visitas[i].estado, numEmbaixadoresAssociados,visitas[i].embaixadores);
+       printf("ID: %d\nEmbaixadores (%d): %s\nEstado: %s\nLocal: %s\nData: %s\n\n",
+               visitas[i].idVisita, numEmbaixadoresAssociados, visitas[i].embaixadores, visitas[i].estado, visitas[i].local, visitas[i].data);
     }
 }
 
@@ -88,8 +88,19 @@ void consultarVisitas(Visita visitas[], int *totalVisitas) {
     for (int i = 0; i < *totalVisitas; i++) {
         if (visitas[i].idVisita == idConsulta) {
             printf("Detalhes da Visita:\n");
-            printf("ID: %d\nLocal: %s\nData: %s\nEstado: %s\nEmbaixadores: %s\n\n",
-               visitas[i].idVisita, visitas[i].local, visitas[i].data, visitas[i].estado, visitas[i].embaixadores);
+
+            int numEmbaixadoresAssociados = 0;
+            char embaixadoresCopy[MAX_NUM_EMBAIXADORES];
+            strcpy(embaixadoresCopy, visitas[i].embaixadores); 
+
+            char *token = strtok(embaixadoresCopy, "|");
+            while (token != NULL) {
+                numEmbaixadoresAssociados++;
+                token = strtok(NULL, "|");
+            }
+
+            printf("ID: %d\nEmbaixadores (%d): %s\nEstado: %s\nLocal: %s\nData: %s\n\n",
+               visitas[i].idVisita, numEmbaixadoresAssociados, visitas[i].embaixadores, visitas[i].estado, visitas[i].local, visitas[i].data);
             return;
         }
     }
