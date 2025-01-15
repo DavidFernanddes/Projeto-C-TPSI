@@ -18,7 +18,7 @@ void carregarEmbaixadores(Estudante embaixadores[], int *totalEmbaixadores) {
         Estudante novoEmbaixador;
 
         sscanf(linha, "%d,%49[^,],%49[^,],%8s", 
-               &novoEmbaixador.numeroEstudante, novoEmbaixador.escola, novoEmbaixador.nomeCompleto, novoEmbaixador.nif);
+               &novoEmbaixador.numeroEstudante, novoEmbaixador.nomeCompleto, novoEmbaixador.escola, novoEmbaixador.nif);
 
         embaixadores[*totalEmbaixadores] = novoEmbaixador;
         (*totalEmbaixadores)++;
@@ -26,7 +26,6 @@ void carregarEmbaixadores(Estudante embaixadores[], int *totalEmbaixadores) {
 
     fclose(file);
 }
-
 
 void salvarEmbaixadores(Estudante embaixadores[], int *totalEmbaixadores) {
     FILE *file = fopen(CSV_FILE_E, "w");
@@ -52,10 +51,20 @@ void listarEmbaixadores(Estudante embaixadores[], int *totalEmbaixadores) {
         return;
     }
 
+    for (int i = 0; i < *totalEmbaixadores - 1; i++) {
+        for (int j = 0; j < *totalEmbaixadores - i - 1; j++) {
+            if (strcmp(embaixadores[j].nomeCompleto, embaixadores[j + 1].nomeCompleto) > 0) {
+                Estudante temp = embaixadores[j];
+                embaixadores[j] = embaixadores[j + 1];
+                embaixadores[j + 1] = temp;
+            }
+        }
+    }
+
     printf("Listagem de Embaixadores:\n");
     for (int i = 0; i < *totalEmbaixadores; i++) {
-        printf("Número: %d\nEscola: %s\nNome: %s\nNIF: %s\n",
-               embaixadores[i].numeroEstudante, embaixadores[i].escola, embaixadores[i].nomeCompleto, embaixadores[i].nif);
+        printf("Número: %d\nNome: %s\nEscola: %s\nNIF: %s\n\n",
+               embaixadores[i].numeroEstudante, embaixadores[i].nomeCompleto, embaixadores[i].escola, embaixadores[i].nif);
     }
 }
 

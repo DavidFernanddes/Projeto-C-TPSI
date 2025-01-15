@@ -50,22 +50,29 @@ void carregarVisitas(Visita visitas[], int *totalVisitas) {
     fclose(file);
 }
 
-
-
 void listarVisitas(Visita visitas[], int *totalVisitas) {
     if (*totalVisitas == 0) {
         printf("Nenhuma visita registrada.\n");
         return;
     }
 
+    printf("Total de visitas registradas: %d\n", *totalVisitas);
     printf("Listagem de Visitas:\n");
     for (int i = 0; i < *totalVisitas; i++) {
-        printf("ID: %d\nLocal: %s\nData: %s\nEstado: %s\nEmbaixadores: %s\n",
-               visitas[i].idVisita, visitas[i].local, visitas[i].data, visitas[i].estado, visitas[i].embaixadores);
+        int numEmbaixadoresAssociados = 0;
+        char embaixadoresCopy[MAX_NUM_EMBAIXADORES];
+        strcpy(embaixadoresCopy, visitas[i].embaixadores); 
+
+        char *token = strtok(embaixadoresCopy, "|");
+        while (token != NULL) {
+            numEmbaixadoresAssociados++;
+            token = strtok(NULL, "|");
+        }
+
+       printf("ID: %d\nLocal: %s\nData: %s\nEstado: %s\nEmbaixadores (%d): %s\n\n",
+               visitas[i].idVisita, visitas[i].local, visitas[i].data, visitas[i].estado, numEmbaixadoresAssociados,visitas[i].embaixadores);
     }
 }
-
-
 
 void consultarVisitas(Visita visitas[], int *totalVisitas) {
     if (*totalVisitas == 0) {
@@ -80,8 +87,8 @@ void consultarVisitas(Visita visitas[], int *totalVisitas) {
     for (int i = 0; i < *totalVisitas; i++) {
         if (visitas[i].idVisita == idConsulta) {
             printf("Detalhes da Visita:\n");
-            printf("ID: %d\nLocal: %s\nData: %s\nEstado: %s\n",
-                   visitas[i].idVisita, visitas[i].local, visitas[i].data, visitas[i].estado);
+            printf("ID: %d\nLocal: %s\nData: %s\nEstado: %s\nEmbaixadores: %s\n\n",
+               visitas[i].idVisita, visitas[i].local, visitas[i].data, visitas[i].estado, visitas[i].embaixadores);
             return;
         }
     }
