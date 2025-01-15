@@ -26,4 +26,12 @@ typedef struct estudante {
     char nif[9];
 } Estudante;
 
+enum escolas { 
+    ESTS = 1, 
+    ESTB = 2,
+    ESE = 3, 
+    ESCE = 4, 
+    ESS = 5 
+};
+
 void gravarDados(Estudante embaixadores[], int *totalEmbaixadores, Visita visitas[], int *totalVisitas);
